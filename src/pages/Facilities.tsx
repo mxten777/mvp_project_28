@@ -36,7 +36,11 @@ const Facilities = () => {
           {facilities.map(facility => (
             <div key={facility.id} className="rounded-2xl bg-white border border-blue-100 shadow-md flex flex-col overflow-hidden hover:shadow-lg transition relative">
               {facility.imageUrl ? (
-                <img src={facility.imageUrl} alt={facility.name} className="w-full h-36 object-cover" />
+                <img
+                  src={facility.imageUrl.startsWith('http') ? facility.imageUrl : `/images/${facility.imageUrl}`}
+                  alt={facility.name}
+                  className="w-full h-36 object-cover"
+                />
               ) : (
                 <div className="w-full h-36 bg-gradient-to-r from-blue-100 to-green-100 flex items-center justify-center text-blue-300 text-base">이미지 없음</div>
               )}
