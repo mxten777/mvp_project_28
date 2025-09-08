@@ -35,44 +35,56 @@ const Login = () => {
   };
 
   return (
-    <div className="max-w-sm mx-auto mt-16 p-6 bg-white rounded-2xl shadow-xl border border-blue-100">
-      <h2 className="text-2xl font-extrabold mb-4 text-center text-blue-700 drop-shadow">{isRegister ? '회원가입' : '로그인'}</h2>
-      <div className="mb-4 text-gray-700 text-center text-base">
-        {isRegister
-          ? '공공시설 예약 및 다양한 서비스를 이용하려면 회원가입이 필요합니다.'
-          : '로그인 후 시설 예약, 내역 확인 등 모든 서비스를 이용할 수 있습니다.'}
+    <section className="w-full min-h-[70vh] flex flex-col items-center justify-center px-2 py-8 sm:py-16">
+      <div className="w-full max-w-sm bg-white/95 rounded-3xl shadow-2xl border border-blue-100 p-4 sm:p-10 flex flex-col gap-8">
+        <header className="w-full flex flex-col items-center mb-2">
+          <h2 className="text-4xl sm:text-5xl font-extrabold text-blue-700 mb-2 text-center drop-shadow-lg tracking-tight">
+            <span className="bg-gradient-to-r from-blue-500 to-green-400 bg-clip-text text-transparent">{isRegister ? '회원가입' : '로그인'}</span>
+          </h2>
+          <p className="text-base sm:text-lg text-gray-600 text-center font-medium">
+            {isRegister
+              ? '공공시설 예약 및 다양한 서비스를 이용하려면 회원가입이 필요합니다.'
+              : '로그인 후 시설 예약, 내역 확인 등 모든 서비스를 이용할 수 있습니다.'}
+          </p>
+        </header>
+        <form onSubmit={handleSubmit} className="flex flex-col gap-5 bg-blue-50 p-4 sm:p-6 rounded-xl shadow-inner" aria-label={isRegister ? '회원가입 폼' : '로그인 폼'} role="form" autoComplete="off">
+          <input
+            type="email"
+            placeholder="이메일"
+            value={email}
+            onChange={e => setEmail(e.target.value)}
+            className="border-2 border-blue-200 rounded-lg p-3 w-full focus:ring-2 focus:ring-blue-400 focus:outline-none focus-visible:ring-4 focus-visible:ring-blue-500 text-base"
+            required
+            aria-label="이메일"
+            aria-required="true"
+            aria-invalid={!email ? 'true' : 'false'}
+          />
+          <input
+            type="password"
+            placeholder="비밀번호"
+            value={password}
+            onChange={e => setPassword(e.target.value)}
+            className="border-2 border-blue-200 rounded-lg p-3 w-full focus:ring-2 focus:ring-blue-400 focus:outline-none focus-visible:ring-4 focus-visible:ring-blue-500 text-base"
+            required
+            aria-label="비밀번호"
+            aria-required="true"
+            aria-invalid={!password ? 'true' : 'false'}
+          />
+          {error && <div className="text-red-500 text-sm text-center">{error}</div>}
+          <button type="submit" className="bg-gradient-to-r from-blue-500 to-blue-400 text-white py-3 rounded-xl font-bold text-lg shadow hover:from-blue-600 hover:to-blue-500 transition focus:outline-none focus-visible:ring-4 focus-visible:ring-blue-500 min-h-[44px] px-6">
+            {isRegister ? '회원가입' : '로그인'}
+          </button>
+        </form>
+        <div className="mt-2 text-center">
+          <button
+            className="text-blue-500 underline text-sm hover:text-blue-700 transition"
+            onClick={() => setIsRegister(!isRegister)}
+          >
+            {isRegister ? '이미 계정이 있으신가요? 로그인' : '계정이 없으신가요? 회원가입'}
+          </button>
+        </div>
       </div>
-      <form onSubmit={handleSubmit} className="flex flex-col gap-4 bg-blue-50 p-4 rounded-xl">
-        <input
-          type="email"
-          placeholder="이메일"
-          value={email}
-          onChange={e => setEmail(e.target.value)}
-          className="border-2 border-blue-200 focus:border-blue-500 p-2 rounded-lg text-base outline-none transition"
-          required
-        />
-        <input
-          type="password"
-          placeholder="비밀번호"
-          value={password}
-          onChange={e => setPassword(e.target.value)}
-          className="border-2 border-blue-200 focus:border-blue-500 p-2 rounded-lg text-base outline-none transition"
-          required
-        />
-        {error && <div className="text-red-500 text-sm text-center">{error}</div>}
-        <button type="submit" className="bg-gradient-to-r from-blue-500 to-blue-400 text-white py-2 rounded-xl font-bold text-lg shadow hover:from-blue-600 hover:to-blue-500 transition">
-          {isRegister ? '회원가입' : '로그인'}
-        </button>
-      </form>
-      <div className="mt-4 text-center">
-        <button
-          className="text-blue-500 underline text-sm"
-          onClick={() => setIsRegister(!isRegister)}
-        >
-          {isRegister ? '이미 계정이 있으신가요? 로그인' : '계정이 없으신가요? 회원가입'}
-        </button>
-      </div>
-    </div>
+    </section>
   );
 };
 
